@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="utf-8">
+     <title>Documents</title>
+     <link rel="stylesheet">
+     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  	 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   </head>
+   <body>
+        <div id ="myDiv"></div>
+        <script >
+            const animals = [ 'Horse', 'Turtle', 'Elephant', 'Monkey' ];
+            
+            var app = document.querySelector('#myDiv');
+            app.innerHTML = '<ul>' + animals.map(function (animal) {
+            	return '<li>' + animal + '</li>';
+            }).join('') + '</ul>';
+        </script>
+   </body>
+</html>
