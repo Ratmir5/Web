@@ -1,0 +1,17 @@
+body{
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+}
+.myDiv
+{
+    width: 400px;
+    background-color: gray;
+    padding: 3px;
+}
+
+.pages
+{
+    margin-left: 10px;
+    background-color: rgb(197, 190, 190);
+}

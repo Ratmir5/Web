@@ -1,0 +1,12 @@
+ul li {
+	background: blue;
+}
+
+li + #thirditem {
+	background: yellow;
+}
+/**** Не изменять выше этой линии. Добавлять ниже. ****/
+
+li + #thirditem {
+	background: green !important;
+}

@@ -1,0 +1,10 @@
+body {
+    background: gray;
+}
+
+.im1 {
+    border-radius: 100%;
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
+}

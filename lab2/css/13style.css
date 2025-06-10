@@ -1,0 +1,15 @@
+.sss {
+    margin: 50px;
+}
+
+a {
+    padding: 10px;
+    border-radius: 4px;
+    background: orange;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    background: darkorange;
+}

@@ -1,0 +1,12 @@
+.text{
+    color:rgb(0, 0, 0);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-left: 7px;
+}
+.picture{
+    width: 210px;
+    height: 210px;
+    border: 3px solid black;
+    float: left;
+    margin-right: 8px;
+}

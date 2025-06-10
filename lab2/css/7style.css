@@ -1,0 +1,25 @@
+/** Пишем код здесь **/
+
+ul li {
+    color: red !important;
+}
+
+OL li:nth-child(2){
+    background: green;
+}
+
+tr:nth-child(odd) {
+    background-color: yellow;
+}
+
+/********** READ-ONLY BLOCK ******
+Не изменять код ниже**/
+
+body {
+	color: blue;
+}
+
+ul li,
+ol li {
+	color: green;
+}

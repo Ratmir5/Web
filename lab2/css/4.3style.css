@@ -1,0 +1,16 @@
+.list1 {
+    list-style-type: lower-alpha;
+}
+
+.list2 {
+    list-style-type: square;
+}
+
+.list3 {
+    list-style-type: armenian;
+}
+
+.list4 {
+    list-style-type: none;
+}
+

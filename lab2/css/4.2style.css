@@ -1,0 +1,11 @@
+.first_fon {
+    background: url("../img/fon.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.second_fon {
+    background: url("../img/fon.jpg");
+    background-size: contain;
+    background-repeat: repeat;
+}

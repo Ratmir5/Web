@@ -1,0 +1,26 @@
+#wrapper{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+#sectionA{
+    width: 33%;
+    border: 2px solid black;
+    height: 300px;
+    padding-top: 10px;
+    font-size:10ch
+}
+#sectionB{
+    width: 33%;
+    border: 2px solid black;
+    height: 300px;
+    padding-top: 10px;
+    font-size:10ch
+}
+#sectionC{
+    width: 33%;
+    border: 2px solid black;
+    height: 300px;
+    padding-top: 10px;
+    font-size:10ch
+}
