@@ -1,13 +1,7 @@
 class BattleshipGame {
     constructor() {
-        // ИЗМЕНЕНИЕ РАЗМЕРОВ ИГРОВОГО ПОЛЯ
-        this.boardSize = 10; // Размер поля: 8, 10 или 12
-        
-        // ИЗМЕНЕНИЕ ЦВЕТА КОРАБЛЕЙ ИГРОКА
-        this.playerColor = '#2196F3';
-        
-        // ИЗМЕНЕНИЕ ЦВЕТА КОРАБЛЕЙ ПРОТИВНИКА  
-        this.enemyColor = '#FF5722';
+        this.boardWidth = 10;  // ИЗМЕНЕНИЕ РАЗМЕРОВ ИГРОВОГО ПОЛЯ
+        this.boardHeight = 10; // ИЗМЕНЕНИЕ РАЗМЕРОВ ИГРОВОГО ПОЛЯ // Размер поля: 8, 10 или 12
         
         this.ships = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1];
         
@@ -29,11 +23,14 @@ class BattleshipGame {
     createBoard(boardId, showShips) {
         const board = [];
         const container = document.getElementById(boardId);
-        container.style.gridTemplateColumns = `repeat(${this.boardSize}, 30px)`;
+        container.style.gridTemplateColumns = `repeat(${this.boardWidth}, 30px)`;
+        container.style.gridTemplateRows = `repeat(${this.boardHeight}, 30px)`;
+        container.style.width = `${this.boardWidth * 30 + 4}px`;
+        container.style.height = `${this.boardHeight * 30 + 4}px`;
         
-        for(let y = 0; y < this.boardSize; y++) {
+        for(let y = 0; y < this.boardHeight; y++) {
             board[y] = [];
-            for(let x = 0; x < this.boardSize; x++) {
+            for(let x = 0; x < this.boardWidth; x++) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
                 cell.dataset.x = x;
@@ -58,14 +55,22 @@ class BattleshipGame {
 
     placeShips() {
         const ships = [];
-        const board = Array(this.boardSize).fill().map(() => Array(this.boardSize).fill(false));
+        const board = Array(this.boardHeight).fill().map(() => Array(this.boardWidth).fill(false));
         
         this.ships.forEach(shipSize => {
             let placed = false;
             while(!placed) {
                 const horizontal = Math.random() > 0.5;
-                const x = Math.floor(Math.random() * (this.boardSize - (horizontal ? shipSize : 0)));
-                const y = Math.floor(Math.random() * (this.boardSize - (horizontal ? 0 : shipSize)));
+                const maxX = this.boardWidth - (horizontal ? shipSize : 0);
+                const maxY = this.boardHeight - (horizontal ? 0 : shipSize);
+                
+                if(maxX <= 0 || maxY <= 0) {
+                    console.error('Корабль слишком большой для поля');
+                    break;
+                }
+                
+                const x = Math.floor(Math.random() * maxX);
+                const y = Math.floor(Math.random() * maxY);
                 
                 if(this.canPlaceShip(board, x, y, shipSize, horizontal)) {
                     const ship = {x, y, size: shipSize, horizontal, hits: 0};
@@ -74,7 +79,9 @@ class BattleshipGame {
                     for(let i = 0; i < shipSize; i++) {
                         const shipX = horizontal ? x + i : x;
                         const shipY = horizontal ? y : y + i;
-                        board[shipY][shipX] = true;
+                        if(shipY < this.boardHeight && shipX < this.boardWidth) {
+                            board[shipY][shipX] = true;
+                        }
                     }
                     placed = true;
                 }
@@ -96,7 +103,7 @@ class BattleshipGame {
                     checkY = y + i;
                 }
                 
-                if(checkX >= 0 && checkX < this.boardSize && checkY >= 0 && checkY < this.boardSize) {
+                if(checkX >= 0 && checkX < this.boardWidth && checkY >= 0 && checkY < this.boardHeight) {
                     if(board[checkY][checkX]) return false;
                 }
             }
@@ -106,6 +113,7 @@ class BattleshipGame {
 
     playerAttack(x, y) {
         if(!this.gameActive || !this.playerTurn) return;
+        if(x >= this.boardWidth || y >= this.boardHeight) return;
         
         const cell = this.enemyBoard[y][x];
         if(cell.hit || cell.miss) return;
@@ -139,8 +147,8 @@ class BattleshipGame {
         
         let x, y, cell;
         do {
-            x = Math.floor(Math.random() * this.boardSize);
-            y = Math.floor(Math.random() * this.boardSize);
+            x = Math.floor(Math.random() * this.boardWidth);
+            y = Math.floor(Math.random() * this.boardHeight);
             cell = this.playerBoard[y][x];
         } while(cell.hit || cell.miss);
         
@@ -181,11 +189,11 @@ class BattleshipGame {
         for(let i = 0; i < ship.size; i++) {
             const x = ship.horizontal ? ship.x + i : ship.x;
             const y = ship.horizontal ? ship.y : ship.y + i;
-            const cell = board[y][x];
-            // ИЗМЕНЕНИЕ ЦВЕТА УНИЧТОЖЕННОГО КОРАБЛЯ
-            cell.element.style.background = '#8B0000';
-            // ИЗМЕНЕНИЕ ВАРИАНТА ОТОБРАЖЕНИЯ УНИЧТОЖЕННОГО КОРАБЛЯ
-            cell.element.style.border = '2px solid #000';
+            if(y < this.boardHeight && x < this.boardWidth) {
+                const cell = board[y][x];
+                cell.element.style.background = '#8B0000'; // ИЗМЕНЕНИЕ ЦВЕТА УНИЧТОЖЕННОГО КОРАБЛЯ
+                cell.element.style.border = '2px solid #000'; // ИЗМЕНЕНИЕ ВАРИАНТА ОТОБРАЖЕНИЯ УНИЧТОЖЕННОГО КОРАБЛЯ
+            }
         }
     }
 
@@ -203,22 +211,19 @@ class BattleshipGame {
     }
 
     updateDisplay() {
-        this.updateBoard(this.playerBoard, this.playerShips, this.playerColor);
-        this.updateBoard(this.enemyBoard, this.enemyShips, this.enemyColor);
+        this.updateBoard(this.playerBoard, this.playerShips, 'player');
+        this.updateBoard(this.enemyBoard, this.enemyShips, 'enemy');
         
         const playerAlive = this.playerShips.filter(ship => ship.hits < ship.size).length;
         const enemyAlive = this.enemyShips.filter(ship => ship.hits < ship.size).length;
         
         document.getElementById('playerShips').textContent = playerAlive;
         document.getElementById('enemyShips').textContent = enemyAlive;
-        
-        document.documentElement.style.setProperty('--player-color', this.playerColor);
-        document.documentElement.style.setProperty('--enemy-color', this.enemyColor);
     }
 
-    updateBoard(board, ships, color) {
-        for(let y = 0; y < this.boardSize; y++) {
-            for(let x = 0; x < this.boardSize; x++) {
+    updateBoard(board, ships, type) {
+        for(let y = 0; y < this.boardHeight; y++) {
+            for(let x = 0; x < this.boardWidth; x++) {
                 const cell = board[y][x];
                 
                 const isSunkenShip = ships.some(ship => {
@@ -233,10 +238,6 @@ class BattleshipGame {
                 });
                 
                 if(isSunkenShip) {
-                    // ИЗМЕНЕНИЕ ЦВЕТА УНИЧТОЖЕННОГО КОРАБЛЯ
-                    cell.element.style.background = '#8B0000';
-                    // ИЗМЕНЕНИЕ ВАРИАНТА ОТОБРАЖЕНИЯ УНИЧТОЖЕННОГО КОРАБЛЯ
-                    cell.element.style.border = '2px solid #000';
                     continue;
                 }
                 
@@ -251,8 +252,9 @@ class BattleshipGame {
                 cell.ship = hasShip;
                 
                 if(hasShip && board === this.playerBoard) {
-                    cell.element.style.setProperty('--ship-color', color);
-                    cell.element.classList.add('ship');
+                    cell.element.classList.add('ship', 'player');
+                } else if(hasShip && board === this.enemyBoard) {
+                    cell.element.classList.add('ship', 'enemy');
                 }
                 
                 if(cell.hit) {

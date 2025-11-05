@@ -1,9 +1,8 @@
-/* ИЗМЕНЕНИЕ ЗАЛИВКИ ФОНА */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* ИЗМЕНЕНИЕ ЗАЛИВКИ ФОНА */
     min-height: 100vh;
 }
 
@@ -49,12 +48,10 @@ body {
     border: 2px solid #333;
 }
 
-/* ИЗМЕНЕНИЕ ЦВЕТА ПОЛЯ */
-/* ИЗМЕНЕНИЕ РАЗМЕРОВ КЛЕТОК ПОЛЯ */
 .cell {
-    width: 30px;
-    height: 30px;
-    background: #87CEEB;
+    width: 30px;  /* ИЗМЕНЕНИЕ РАЗМЕРОВ КЛЕТОК ПОЛЯ */
+    height: 30px; /* ИЗМЕНЕНИЕ РАЗМЕРОВ КЛЕТОК ПОЛЯ */
+    background: #87CEEB; /* ИЗМЕНЕНИЕ ЦВЕТА ПОЛЯ */
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
@@ -69,19 +66,20 @@ body {
     background: #5F9EA0;
 }
 
-/* ИЗМЕНЕНИЕ ЦВЕТА КОРАБЛЕЙ ИГРОКА И ПРОТИВНИКА */
-.cell.ship {
-    background: var(--ship-color, #666);
+.cell.ship.player {
+    background: #2196F3; /* ИЗМЕНЕНИЕ ЦВЕТА КОРАБЛЕЙ ИГРОКА */
 }
 
-/* ИЗМЕНЕНИЕ ЦВЕТА ПОДБИТОГО КОРАБЛЯ */
+.cell.ship.enemy {
+    background: #87CEEB; /* ИЗМЕНЕНИЕ ЦВЕТА КОРАБЛЕЙ ПРОТИВНИКА */
+}
+
 .cell.hit {
-    background: #ff4444;
+    background: #ff4444; /* ИЗМЕНЕНИЕ ЦВЕТА ПОДБИТОГО КОРАБЛЯ */
 }
 
-/* ИЗМЕНЕНИЕ ВАРИАНТА ОТОБРАЖЕНИЯ ПОДБИТОГО КОРАБЛЯ */
 .cell.hit::after {
-    content: "💥";
+    content: "💥"; /* ИЗМЕНЕНИЕ ВАРИАНТА ОТОБРАЖЕНИЯ ПОДБИТОГО КОРАБЛЯ */
 }
 
 .cell.miss {
@@ -99,16 +97,14 @@ body {
     text-align: center;
 }
 
-/* ИЗМЕНЕНИЕ ЦВЕТА ЗАЛИВКИ КНОПКИ НОВАЯ ИГРА */
-/* ИЗМЕНЕНИЕ РАЗМЕРОВ КНОПКИ НОВАЯ ИГРА */
 button {
-    background: #4CAF50;
+    background: #4CAF50; /* ИЗМЕНЕНИЕ ЦВЕТА ЗАЛИВКИ КНОПКИ НОВАЯ ИГРА */
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 20px; /* ИЗМЕНЕНИЕ РАЗМЕРОВ КНОПКИ НОВАЯ ИГРА */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 16px;    /* ИЗМЕНЕНИЕ РАЗМЕРОВ КНОПКИ НОВАЯ ИГРА */
 }
 
 button:hover {
