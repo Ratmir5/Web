@@ -1,131 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="./style.css">
-	<title>Шашки</title>
+    <title>Морской бой</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body id="ht">
-<div class="checker white_checker" style="display:none"> </div>
-<div class="checker black_checker" style="display:none"> </div>
+<body>
+    <div class="game-container">
+        <div class="player-info">
+            <h2>Игрок</h2>
+            <div class="ships-remaining">Корабли: <span id="playerShips">10</span></div>
+        </div>
+        
+        <div class="boards-container">
+            <div class="board-container">
+                <h3>Ваше поле</h3>
+                <div class="board" id="playerBoard"></div>
+            </div>
+            
+            <div class="board-container">
+                <h3>Поле противника</h3>
+                <div class="board" id="enemyBoard"></div>
+            </div>
+        </div>
 
+        <div class="enemy-info">
+            <h2>Противник</h2>
+            <div class="ships-remaining">Корабли: <span id="enemyShips">10</span></div>
+        </div>
+    </div>
 
-<div class="square" style="display: none" id ="ht"> </div>
-<div class="black_background" id="black_background"> </div>
+    <div class="controls">
+        <button id="restartGame">Новая игра</button>
+    </div>
 
-	<div class="score" id="score">
-		<br>
-	</div>
-<div class="table" id="table">
+    <div id="gameMessage" class="message"></div>
 
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>	
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>
-	<div class="checker white_checker"> </div>	
-
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-	<div class="checker black_checker"></div>
-
-
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="clear_float"> </div>
-	
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="clear_float"> </div>
-
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="square white_square"> </div>
-	<div class="square black_square"> </div>
-	<div class="clear_float"> </div>
-
-</div>
-
-<script src="./script.js" > </script>
+    <script src="script.js"></script>
 </body>
 </html>
